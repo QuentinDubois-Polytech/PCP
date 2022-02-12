@@ -1,3 +1,5 @@
+from fractions import Fraction
+
 def isNumber(s):
     try:
         int(s)
@@ -9,14 +11,14 @@ def isNumber(s):
 def eval(op, u, v):
     match op:
         case "+":
-            return u + v
+            return Fraction(u) + Fraction(v)
         case "-":
-            return u - v
+            return Fraction(u) - Fraction(v)
         case "*":
-            return u * v
+            return Fraction(u) * Fraction(v)
         case "/":
             if v != 0:
-                return u / v
+                return Fraction(u) / Fraction(v)
             else:
                 raise Exception
         case _:
@@ -46,6 +48,4 @@ def eval_expression(expression):
 expression1 = input().split()
 expression2 = input().split()
 
-res_expression1 = eval_expression(expression1)
-res_expression2 = eval_expression(expression2)
-print(res_expression1 == res_expression2)
+print(eval_expression(expression1) == eval_expression(expression2))
