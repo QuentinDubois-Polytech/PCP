@@ -1,23 +1,28 @@
 # Valeurs de player
-# True : premier joueur
-# False : deuxième joueur
+# 0 : deuxième joueur à la SG
+# 1 : premier joueur à la SG
 
-def division(number, divide_by, player):
-    if not player:
-        if (number - 1) // 2 == 0 or (number - 1) // 3 == 0 or (number - 1) // 7 == 0:
-            return False
-
-    number = (number - 1) // divide_by
-
+def division(number, player):
     if number == 0:
-        return player
+        return 1 - player
     else:
-        return division(number, 2, not player) or division(number, 3, not player) or division(number, 7, not player)
-
+        number -= 1
+        if player == 0:
+            return min(
+                division(number//2, 1),
+                division(number//3, 1),
+                division(number//7, 1)
+            )
+        else:
+            return max(
+                division(number // 2, 0),
+                division(number // 3, 0),
+                division(number // 7, 0)
+            )
 
 def print_winner(number):
-    res = division(number, 2, True) or division(number, 3, True) or division(number, 7, True)
-    print("First player" if res else "Second player")
+    res = division(number, 0)
+    print("First player" if res == 0 else "Second player")
 
 
 n = int(input())
