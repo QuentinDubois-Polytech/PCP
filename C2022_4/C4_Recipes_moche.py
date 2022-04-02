@@ -1,9 +1,8 @@
 N, a, b, c = map(int, input().split())
 res = tuple(map(int, input().split()))
+
 init = (a, b, c)
 states_achieved = {init}
-
-
 count = 0
 
 stack1 = [init]
